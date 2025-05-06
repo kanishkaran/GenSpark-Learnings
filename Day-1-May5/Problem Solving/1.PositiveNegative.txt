@@ -1,0 +1,17 @@
+def plusMinus(arr):
+    # Write your code here
+    countPositive = 0
+    countNegative = 0
+    countZero = 0
+    n = len(arr)
+    
+    for number in arr:
+        if number > 0:
+            countPositive += 1
+        elif number < 0:
+            countNegative += 1
+        else:
+            countZero += 1
+    print(f"{countPositive / n:.6f}")
+    print(f"{countNegative / n:.6f}")
+    print(f"{countZero / n:.6f}")

@@ -1,0 +1,14 @@
+def miniMaxSum(arr):
+    # Write your code here
+    minElement = arr[0]
+    maxElement = arr[0]
+    total = 0
+    
+    for number in arr:
+        total += number
+        if number > maxElement:
+            maxElement = number
+        if number < minElement:
+            minElement = number        
+        
+    print(f"{total - maxElement} {total - minElement}")

@@ -1,0 +1,17 @@
+    public static int getTotalX(List<int> a, List<int> b)
+    {
+        int totalCount = 0;
+        
+        for (int num = a.Max(); num <= b.Min(); num++)
+        {
+            bool isFactorOfA = a.All(x => num % x == 0);
+            bool isFactorOfB = b.All(y => y % num == 0);
+            
+            if (isFactorOfA && isFactorOfB)
+                totalCount++;
+        }
+        return totalCount;
+        
+        
+
+    }

@@ -1,0 +1,14 @@
+    public static void bonAppetit(List<int> bill, int k, int b)
+    {
+        int total = 0;
+        
+        foreach (int price in bill)
+        {
+            total += price;
+        }
+        
+        if(((total - bill[k]) / 2 == b))
+            Console.WriteLine("Bon Appetit");
+        else
+            Console.WriteLine($"{b - ((total - bill[k]) / 2)}");
+    }

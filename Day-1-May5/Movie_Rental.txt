@@ -1,0 +1,20 @@
+formatMaster
+	id, type
+
+CategoryMaster
+	id, Name
+
+Movie
+	Movie_Number, movieName, formatId, categoryId
+
+CD
+	id, Movie_Number
+
+Member
+	id, Name, Phone_number, MembershipType, fav_category
+
+Dependent
+	id, Name, MemberId
+
+RentalOrder
+	id, cd_id, renter_type, render_id, rental_date, return_date, status

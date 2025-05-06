@@ -1,0 +1,16 @@
+    public static int divisibleSumPairs(int n, int k, List<int> ar)
+    {
+        int divisiblePairs = 0;
+        
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = i; j < n; j++)
+            {
+                if ((i < j) && (ar[i] + ar[j]) % k == 0 )
+                    divisiblePairs++;
+            }
+        }
+        return divisiblePairs;
+    }
+
+}

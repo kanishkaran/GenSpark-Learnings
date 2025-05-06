@@ -1,0 +1,21 @@
+    public static List<int> breakingRecords(List<int> scores)
+    {
+        int minScore = scores[0], maxScore = scores[0];
+        int minCount = 0, maxCount = 0;
+        
+        foreach (int score in scores)
+        {
+            if (score > maxScore)
+            {
+                maxScore = score;
+                maxCount++;
+            }
+            else if (score < minScore)
+            {
+                minScore = score;
+                minCount++;
+            }   
+        }
+        
+        return new List<int> {maxCount, minCount};
+    }

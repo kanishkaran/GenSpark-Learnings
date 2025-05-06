@@ -1,0 +1,20 @@
+    public static int migratoryBirds(List<int> arr)
+    {
+        int[] freq = new int[6];
+        int maxCount = 0;
+        int freqType = 1;
+        foreach (int type in arr)
+        {
+            freq[type]++;
+        }
+        
+        for (int i = 1; i <= 5; i++)
+        {
+            if (freq[i] > maxCount)
+            {
+                maxCount = freq[i];
+                freqType =i;
+            }
+        }
+        return freqType;
+    }
