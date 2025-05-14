@@ -1,0 +1,46 @@
+PostgreSQL Streaming Replication Setup
+======================================
+
+TERMINAL 1 – Primary Server Setup
+---------------------------------
+
+1. Navigate to PostgreSQL binaries directory:
+   cd "C:\Program Files\PostgreSQL\17\bin"
+
+2. Initialize the Primary Database:
+   initdb -D "C:\Users\admin\Desktop\kanishkaran\practice\sql\server_replication\primary"
+
+3. Start the Primary Server on Port 5433:
+   pg_ctl -D "C:\Users\admin\Desktop\kanishkaran\practice\sql\server_replication\primary" -o "-p 5433" -l "C:\Users\admin\Desktop\kanishkaran\practice\sql\server_replication\primary\logfile" start
+
+4. Set Username and password
+   psql -p 5433 -d postgres -c "CREATE ROLE replicator with REPLICATION LOGIN PASSWORD 'repl_pass';
+
+5. Login to PostgreSQL:
+   psql -p 5433 -d postgres
+
+6. Check replication status:
+   select * from pg_stat_replication;
+
+   Expected Output: Returns a table with replication details
+
+
+TERMINAL 2 – Secondary Server Setup
+-----------------------------------
+
+1. Navigate to PostgreSQL binaries directory:
+   cd "C:\Program Files\PostgreSQL\17\bin"
+
+2. Create a base backup for replication:
+   pg_basebackup -D "C:\Users\admin\Desktop\kanishkaran\practice\sql\server_replication\secondary" -Fp -Xs -P -R -h 127.0.0.1 -U replicator -p 5433
+
+3. Start the Secondary Server (on a different port, e.g., 5435):
+   pg_ctl -D "C:\Users\admin\Desktop\kanishkaran\practice\sql\server_replication\secondary" -o "-p 5435" -l "C:\Users\admin\Desktop\kanishkaran\practice\sql\server_replication\secondary\logfile" start
+
+4. Login to PostgreSQL:
+   psql -p 5435 -d postgres
+
+5. Check if server is in recovery mode:
+   select pg_is_in_recovery();
+
+   Expected Output: Returns 'true'

@@ -1,0 +1,16 @@
+In Primary DB-Server
+1.Creating a User to Use the Database
+>>> CREATE USER admin_user WITH PASSWORD 'admin_pass';
+
+2.Grant All privileges to admin_user
+>>> GRANT ALL PRIVILEGES ON DATABASE postgres TO admin_user;
+
+3.Proceed connection with PgAdmin as admin_user
+	
+	1. Register Server -> Server
+	2. Provide a Name
+	3. In connections tab, keep host as localhost
+	4. Provide appropriate port number
+	5. Provide the Username and Password
+
+4. Use Query tool as usual to type queries
