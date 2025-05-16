@@ -1,0 +1,23 @@
+college
+	college_id, college_name
+
+Students
+	student_id, student_name, phone_number, email, college_id
+
+Technology
+	tech_id, technology_name
+
+Course
+	course_id, course_name, tech_id, duration
+
+Student_enrollment
+	enrollment_id, student_id, course_id, enrollment_date, iscomplete
+
+Trainer
+	trainer_id, trainer_name, phone_number
+
+Certificate
+	cert_id, serial_number, enrollment_id, issue_date
+
+Course Trainer
+	id, course_id, , trainer_id
