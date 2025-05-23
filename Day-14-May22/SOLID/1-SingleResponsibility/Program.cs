@@ -10,7 +10,7 @@
 using _1_SingleResponsibility.Models;
 using _1_SingleResponsibility.Services;
 
-namespace SOLID
+namespace _1_SingleResponsibility
 {
     class Program
     {
