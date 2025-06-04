@@ -9,7 +9,7 @@ namespace BankApi.Models
     {
         public int Id { get; set; }
         public int AccountId { get; set; }
-        public int AccountNumber { get; set; }
+        public int AccountNumber { get; set; }              // Can Be Removed
         public string TransactionType { get; set; } = string.Empty;
         public float Amount { get; set; }
 

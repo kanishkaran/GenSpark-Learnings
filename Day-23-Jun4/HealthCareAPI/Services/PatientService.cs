@@ -26,10 +26,13 @@ namespace HealthCareAPI.Services
         {
             _patientRepository = patientRepository;
             _userRepository = userRepository;
+
             _logger = logger;
             _encryptionService = encryptionService;
             _mapper = mapper;
         }
+
+
         public async Task<Patient> RegisterPatient(PatientAddRequestDto patient)
         {
             if (patient.Age < 0 || patient.PhoneNumber.Length < 10 || patient.PatientName.Length < 3)

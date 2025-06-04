@@ -1,3 +1,4 @@
+using System.Text;
 using AutoMapper;
 using HealthCareAPI.Contexts;
 using HealthCareAPI.Interfaces;
@@ -5,7 +6,9 @@ using HealthCareAPI.Misc;
 using HealthCareAPI.Models;
 using HealthCareAPI.Repositories;
 using HealthCareAPI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -45,6 +48,23 @@ builder.Services.AddTransient<IOtherFunctionalities, OtherFunctionalities>();
 builder.Services.AddAutoMapper(typeof(User));
 #endregion
 
+
+
+
+#region AuthenticationFilter
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateAudience = false,
+                        ValidateIssuer = false,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Keys:JwtTokenKey"]))
+                    };
+                });
+#endregion
 
 builder.Services.AddDbContext<HealthCareDbContext>(opt =>
 {

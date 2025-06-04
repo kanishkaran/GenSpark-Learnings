@@ -4,6 +4,7 @@ using BankApi.Models;
 using BankApi.Repositories;
 using BankApi.Services;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.SemanticKernel;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,17 @@ builder.Services.AddTransient<ITransactionService, TransactionService>();
 
 
 builder.Services.AddTransient<ITransferAmountService, TransferAmountService>();
+
+
+#pragma warning disable SKEXP0070
+builder.Services.AddOllamaChatCompletion(
+    modelId: "llama3.2:3b",
+    endpoint: new Uri("http://localhost:11434")
+);
+
+builder.Services.AddTransient((serviceProvider)=> {
+    return new Kernel(serviceProvider);
+});
 
 
 var app = builder.Build();
