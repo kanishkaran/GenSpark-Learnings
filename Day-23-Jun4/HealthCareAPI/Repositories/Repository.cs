@@ -18,7 +18,7 @@ namespace HealthCareAPI.Repositories
         public abstract Task<T> GetById(K id);
 
         public abstract Task<IEnumerable<T>> GetAll();
-        public async Task<T> Add(T item)
+        public virtual async Task<T> Add(T item)
         {
 
             _context.Add(item);

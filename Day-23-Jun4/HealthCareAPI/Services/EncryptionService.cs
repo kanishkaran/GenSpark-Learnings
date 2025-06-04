@@ -11,7 +11,7 @@ namespace HealthCareAPI.Services
 {
     public class EncryptionService : IEncryptionService
     {
-        public async Task<EncryptModel> EncryptData(EncryptModel data)
+        public virtual async Task<EncryptModel> EncryptData(EncryptModel data)
         {
             HMACSHA256 hMACSHA256;
             if (data.Hashkey != null)

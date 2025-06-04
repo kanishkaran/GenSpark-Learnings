@@ -33,7 +33,7 @@ namespace HealthCareAPI.Services
         }
 
 
-        public async Task<Patient> RegisterPatient(PatientAddRequestDto patient)
+        public  async Task<Patient> RegisterPatient(PatientAddRequestDto patient)
         {
             if (patient.Age < 0 || patient.PhoneNumber.Length < 10 || patient.PatientName.Length < 3)
             {

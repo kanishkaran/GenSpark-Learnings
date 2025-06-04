@@ -29,13 +29,13 @@ namespace HealthCareAPI.Test
             _context = new(options);
         }
         [Test]
-        public async Task RegisterPatient_ValidData_ReturnsPatient()
+        public async Task RegisterPatient()
         {
             // Arrange
-            var patientRepo = new PatientRepository(_context);
-            var userRepoMock = new Mock<IRepository<string, User>>();
+            var patientRepo = new Mock<PatientRepository>(_context);
+            var userRepoMock = new Mock<UserRepository>(_context);
             var loggerMock = new Mock<ILogger<PatientService>>();
-            var encryptionServiceMock = new Mock<IEncryptionService>();
+            var encryptionServiceMock = new Mock<EncryptionService>();
             var mapperMock = new Mock<IMapper>();
 
             var patientDto = new PatientAddRequestDto
@@ -54,13 +54,22 @@ namespace HealthCareAPI.Test
                 Username = username,
                 Password = password,
                 HashKey = Guid.NewGuid().ToByteArray(),
-                Role = "Doctor"
+                Role = "Patient"
             };
+
             var patient = new Patient { Id = 1, PatientName = "Test" };
+            var encryptedModel = new EncryptModel();
+
+
+            mapperMock.Setup(m => m.Map<PatientAddRequestDto, User>(It.IsAny<PatientAddRequestDto>())).Returns(user);
+            mapperMock.Setup(m => m.Map<PatientAddRequestDto, Patient>(It.IsAny<PatientAddRequestDto>())).Returns(patient);
+            encryptionServiceMock.Setup(en => en.EncryptData(It.IsAny<EncryptModel>())).ReturnsAsync(encryptedModel);
+            userRepoMock.Setup(us => us.Add(It.IsAny<User>())).ReturnsAsync(user);
+            patientRepo.Setup(ad => ad.Add(It.IsAny<Patient>())).ReturnsAsync(patient);
 
 
             var service = new PatientService(
-                patientRepo,
+                patientRepo.Object,
                 userRepoMock.Object,
                 loggerMock.Object,
                 encryptionServiceMock.Object,
@@ -75,6 +84,7 @@ namespace HealthCareAPI.Test
             Assert.That(result.PatientName, Is.EqualTo("Test"));
 
         }
+
 
         [TearDown]
         public void DisposeContext()
