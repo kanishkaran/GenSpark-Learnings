@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Threading.Tasks;
+
 using AutoMapper;
 using HealthCareAPI.Contexts;
 using HealthCareAPI.Interfaces;
 using HealthCareAPI.Misc;
+using HealthCareAPI.Models;
 using HealthCareAPI.Models.DTOs;
 using HealthCareAPI.Repositories;
 using HealthCareAPI.Services;
@@ -64,6 +61,46 @@ namespace HealthCareAPI.Test
             var result = await doctorService.GetDoctorsBySpeciality(speciality);
 
             Assert.That(result, Has.Count.EqualTo(1));
+        }
+
+        [Test]
+        public async Task TestGetAllDoctors()
+        {
+            // Arrange
+            var doctorRepoMock = new Mock<IRepository<int, Doctor>>();
+            var specializationRepoMock = new Mock<IRepository<int, Specialization>>();
+            var doctorSpecializationRepoMock = new Mock<IRepository<int, DoctorSpecialization>>();
+            var otherFunctionalitiesMock = new Mock<IOtherFunctionalities>();
+            var userRepoMock = new Mock<IRepository<string, User>>();
+            var encryptionServiceMock = new Mock<IEncryptionService>();
+            var mapperMock = new Mock<IMapper>();
+
+            var doctors = new List<Doctor>
+            {
+                new Doctor { Id = 1, DoctorName = "Test A" },
+                new Doctor { Id = 2, DoctorName = "Test B" }
+            };
+
+            doctorRepoMock.Setup(r => r.GetAll()).ReturnsAsync(doctors);
+
+            var doctorService = new DoctorService(
+                doctorRepoMock.Object,
+                specializationRepoMock.Object,
+                doctorSpecializationRepoMock.Object,
+                otherFunctionalitiesMock.Object,
+                userRepoMock.Object,
+                encryptionServiceMock.Object,
+                mapperMock.Object
+            );
+
+            // Act
+            var result = await doctorService.GetAllDoctors();
+
+            // Assert
+            Assert.That(result, Is.Not.Null);
+            Assert.That(result.Count, Is.EqualTo(2));
+            Assert.That(result, Has.Some.Matches<Doctor>(d => d.DoctorName == "Test A"));
+            Assert.That(result, Has.Some.Matches<Doctor>(d => d.DoctorName == "Test B"));
         }
 
         [TearDown]
