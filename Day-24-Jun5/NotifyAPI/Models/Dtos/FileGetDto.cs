@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace FileHandleAPI.Models.Dtos
+namespace NotifyAPI.Models.Dtos
 {
     public class FileGetDto
     {

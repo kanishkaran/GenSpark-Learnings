@@ -1,0 +1,52 @@
+<html>
+
+<body>
+    <h2>SignalR Demonstration</h2>
+
+    <input type="text" id="user" placeholder="User" />
+    <input type="text" id="message" placeholder="Message">
+
+    <button onclick="sendMessage()">Send</button>
+    <div id="msg"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.7/dist/browser/signalr.min.js"></script>
+    <script>
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("http://localhost:5179/notificationhub", {
+                withCredentials: true
+            })
+            .withAutomaticReconnect()
+            .build();
+
+
+        connection.on("ReceiveMessage", (user, message) => {
+            const container = document.getElementById("msg");
+            const para = document.createElement("p");
+            para.innerHTML = `${user}: ${message}`
+
+            container.append(para);
+        })
+
+        connection.start().then(() => {
+            connection.invoke("SendMessage", "Test", "Test Message");
+        })
+            .catch(err => {
+                console.log("Connection Failed");
+            })
+
+        function sendMessage() {
+            const user = document.getElementById("user").value;
+            const message = document.getElementById("message").value;
+
+
+            connection.invoke("SendMessage", user, message)
+                .catch(err => {
+                    console.log("Connection Failed");
+                })
+
+        }
+
+    </script>
+</body>
+
+</html>

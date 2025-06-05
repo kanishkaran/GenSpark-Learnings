@@ -1,0 +1,34 @@
+<html>
+
+<body>
+    <h2>SignalR Demonstration</h2>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@microsoft/signalr@8.0.7/dist/browser/signalr.min.js"></script>
+    <script>
+
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJhZEBnbWFpbC5jb20iLCJyb2xlIjoic3RhZmYiLCJuYmYiOjE3NDkxMjY5OTQsImV4cCI6MTc0OTIxMzM5NCwiaWF0IjoxNzQ5MTI2OTk0fQ.AC2w-6PuCKoJKjsDm4i1ou8F94DnQORUahK-o_QeoQQ"
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("http://localhost:5150/notificationHub", {
+                accessTokenFactory: () => token
+            })
+            .withAutomaticReconnect()
+            .build();
+
+
+        connection.on("ReceiveNotification", (message, uploadLoadedBy) => {
+            
+            alert(`${message} by ${uploadLoadedBy}`)
+
+        })
+
+        connection.start()
+            .catch(err => {
+                console.log("Connection Failed");
+            })
+
+
+    </script>
+</body>
+
+</html>

@@ -14,6 +14,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.Extensions;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
+using HealthCareAPI.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -84,6 +85,7 @@ builder.Services.AddScoped<CustomExceptionFilter>();
 #endregion
 
 builder.Services.AddTransient<IAuthorizationHandler, MinExpYearsHandler>();
+builder.Services.AddSignalR();
 
 #region Policies
 builder.Services.AddAuthorization(opt =>
@@ -92,38 +94,51 @@ builder.Services.AddAuthorization(opt =>
 });
 #endregion
 
-builder.Services.AddAuthentication(options =>
+// builder.Services.AddAuthentication(options =>
+// {
+//     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+//     options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+// })
+// .AddCookie()
+// .AddGoogle(options =>
+// {
+//     options.ClientId = "";
+//     options.ClientSecret = "";
+//     options.CallbackPath = "/signin-google";
+//     options.SaveTokens = true;
+// });
+
+
+#region CORS
+builder.Services.AddCors(opts =>
 {
-    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
-})
-.AddCookie()
-.AddGoogle(options =>
-{
-    options.ClientId = "";
-    options.ClientSecret = "";
-    options.CallbackPath = "/signin-google";
-    options.SaveTokens = true;
+    opts.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://127.0.0.1:5500")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
 });
+#endregion
 
+#region AuthenticationFilter
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.Authority = "https://dev-1h0fyukuz3mwjbsf.us.auth0.com/";
+                    options.Audience = "https://sample-api";
 
-// #region AuthenticationFilter
-// builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-//                 .AddJwtBearer(options =>
-//                 {
-//                     options.Authority = "https://dev-1h0fyukuz3mwjbsf.us.auth0.com/";
-//                     options.Audience = "https://sample-api";
-
-//                     options.TokenValidationParameters = new TokenValidationParameters
-//                     {
-//                         ValidateAudience = true,
-//                         ValidateIssuer = true,
-//                         ValidateLifetime = true,
-//                         //ValidateIssuerSigningKey = true,
-//                         //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Keys:JwtTokenKey"]))
-//                     };
-//                 });
-// #endregion
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateAudience = true,
+                        ValidateIssuer = true,
+                        ValidateLifetime = true,
+                        //ValidateIssuerSigningKey = true,
+                        //IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Keys:JwtTokenKey"]))
+                    };
+                });
+#endregion
 
 builder.Services.AddDbContext<HealthCareDbContext>(opt =>
 {
@@ -139,8 +154,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
 }
 
+app.UseCors();
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.MapHub<NotificationHub>("/notificationhub");
 app.MapControllers();
 
 

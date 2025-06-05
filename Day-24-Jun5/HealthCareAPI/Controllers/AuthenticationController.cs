@@ -14,12 +14,9 @@ namespace HealthCareAPI.Controllers
     public class AuthenticationController : Controller
     {
         private readonly IAuthenticationService _authenticationService;
-        private readonly ILogger<AuthenticationController> _logger;
-
-        public AuthenticationController(IAuthenticationService authenticationService, ILogger<AuthenticationController> logger)
+             public AuthenticationController(IAuthenticationService authenticationService)
         {
             _authenticationService = authenticationService;
-            _logger = logger;
         }
 
         [HttpPost("Login")]
