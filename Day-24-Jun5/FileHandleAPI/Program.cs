@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddScoped<IFileHandle, FIleHandle>();
+builder.Services.AddScoped<IFileHandleService, FileHandleService>();
 
 builder.Services.AddDbContext<FileHandleContext>(opts =>
 {

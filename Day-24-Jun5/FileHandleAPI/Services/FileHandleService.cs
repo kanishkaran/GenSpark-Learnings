@@ -1,23 +1,25 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using FileHandleAPI.Context;
 using FileHandleAPI.Interfaces;
 using FileHandleAPI.Models;
+using FileHandleAPI.Models.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace FileHandleAPI.Services
 {
-    public class FIleHandle : IFileHandle
+    public class FileHandleService : IFileHandleService
     {
         private readonly FileHandleContext _context;
 
-        public FIleHandle(FileHandleContext context)
+        public FileHandleService(FileHandleContext context)
         {
             _context = context;
         }
-        public async Task<FileData> DownloadFileById(int id)
+        public async Task<FileGetDto> DownloadFileById(int id)
         {
             try
             {
@@ -27,7 +29,15 @@ namespace FileHandleAPI.Services
                 {
                     throw new FileNotFoundException("file is not found");
                 }
-                return file;
+
+                var content = Encoding.UTF8.GetString(file.FileContent);
+               
+                return new FileGetDto
+                {
+                    FileContent = content,
+                    FileId = file.Id,
+                    FileType = file.FileType
+                };
             }
             catch (System.Exception)
             {

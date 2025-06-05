@@ -13,9 +13,9 @@ namespace FileHandleAPI.Controllers
     [Route("api/[controller]")]
     public class FileController : Controller
     {
-        private readonly IFileHandle _fileHandleService;
+        private readonly IFileHandleService _fileHandleService;
 
-        public FileController(IFileHandle fileHandle)
+        public FileController(IFileHandleService fileHandle)
         {
             _fileHandleService = fileHandle;
         }
@@ -37,7 +37,7 @@ namespace FileHandleAPI.Controllers
 
 
         [HttpGet("GetFile")]
-        public async Task<ActionResult<FileData>> GetFile(int id)
+        public async Task<ActionResult<FileGetDto>> GetFile(int id)
         {
             try
             {
