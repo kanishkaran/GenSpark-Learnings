@@ -1,0 +1,24 @@
+<div class="customer-details">
+    <label>Name: <input type="text" #nameInput [value]="uname" class="input"></label>
+    <label>Phone Number: <input type="text" #phoneInput [value]="phoneNumber" class="input"></label>
+    <label>Age: <input type="text" #ageInput [value]="age" class="input"></label>
+    <button (click)="displayCustomer(nameInput.value, phoneInput.value, ageInput.value)"
+        class="display-btn">Display</button>
+
+    <div [class]="className">
+        <h3>Name: {{ uname }}</h3>
+        <p>phone: {{ phoneNumber }}</p>
+        <p>age: {{ age }}</p>
+
+        <div class="container">
+            <button class="like-btn" (click)="like()">
+                <i class="bi bi-hand-thumbs-up"></i>
+            </button>
+            <span class="count">{{ likeCount }}</span>
+            <button class="like-btn" (click)="dislike()">
+                <i class="bi bi-hand-thumbs-down"></i>
+            </button>
+            <span class="count">{{ dislikeCount }}</span>
+        </div>
+    </div>
+</div>

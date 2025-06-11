@@ -1,0 +1,13 @@
+<p>first-component works!</p>
+
+<h2>
+    Hello {{name}}
+</h2>
+<input type="text" [(ngModel)] = "name">
+<hr>
+<input type="text" #userName>
+<button (click) = "onButtonClick(userName.value)">click</button>
+
+<hr>
+<h2>Like Button</h2>
+<i [class]="className" (click) = "toggleLike()"></i>
