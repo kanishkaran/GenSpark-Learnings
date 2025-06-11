@@ -1,0 +1,9 @@
+@if(products){
+
+    @for (item of products; track $index) {
+        <app-product [product]="item"></app-product>
+    }
+}
+@else {
+    <p>No products available</p>
+}

@@ -1,0 +1,9 @@
+
+@if(recipes().length !== 0){
+    @for (item of recipes(); track $index) {
+        <app-recipe [recipe]="item"></app-recipe>
+    }
+}
+@else {
+    <h2>No recipes found</h2>
+}
