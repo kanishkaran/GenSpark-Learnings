@@ -1,0 +1,15 @@
+
+<div class="container">
+    <button class="callback" (click)="displayData()">Get User Data Using Callback</button>
+    <button class="promise" (click)="displayDataPromise()">Get User Data Using promise</button>
+    <button class="asyncAwait" (click)="displayDataAsync()">Get User Data Using asyncAwait</button>
+
+    @if(userData){
+        @for (item of userData; track $index) {
+            <div [class] = "className">
+                <p>Id: {{item.id}}</p>
+            <p>Name: {{item.name}}</p>
+            </div>
+        }
+    }
+</div>
