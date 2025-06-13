@@ -1,0 +1,27 @@
+
+<button type="button" class="btn btn-primary position-relative">
+  Cart
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    {{cartCount}}
+  </span>
+</button>
+<div class="container">
+    @if(carItems){
+        @for (item of carItems; track $index) {
+            <p>{{item.id}} - {{item.count}}</p>
+        }
+    }
+  </div>
+
+
+<div>
+    @if(products){
+
+    @for (item of products; track $index) {
+        <app-product (addToCart)="handleAddToCart($event)" [product]="item"></app-product>
+    }
+}
+@else {
+    <p>No products available</p>
+}
+</div>

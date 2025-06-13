@@ -1,0 +1,22 @@
+<div class="card shadow-sm mb-4 mx-auto" style="max-width: 400px;">
+  <div class="card-body">
+    <h3 class="card-title text-center mb-3 text-primary">Weather App</h3>
+    <div class="mb-3">
+      <label for="city" class="form-label">Enter City</label>
+      <input
+        type="text"
+        class="form-control"
+        id="city"
+        placeholder="e.g. Chennai"
+        [(ngModel)]="cityName"
+      >
+    </div>
+    <button
+      type="submit"
+      class="btn btn-primary w-100"
+      (click)="handleSearchWeather()"
+    >
+      Search
+    </button>
+  </div>
+</div>

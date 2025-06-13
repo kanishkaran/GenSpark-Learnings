@@ -1,0 +1,24 @@
+<div class="card shadow-sm mx-auto mt-4" style="max-width: 22rem;">
+  <div class="card-body text-center">
+    
+      <img 
+        [src]="'https://openweathermap.org/img/wn/' + weather.weather[0].icon + '@2x.png'" 
+        [alt]="weather?.weather?.[0]?.description || 'Weather icon'" 
+        width="80" height="80"
+      >
+    
+    <h2 class="card-title mb-3">{{ weather?.name }}</h2>
+    <h3 class="display-6 mb-2">{{ weather?.main?.temp }} <span class="fs-5 text-secondary">K</span></h3>
+    <ul class="list-group list-group-flush mb-2">
+      <li class="list-group-item">
+        <strong>Condition:</strong> {{ weather?.weather?.[0]?.description }}
+      </li>
+      <li class="list-group-item">
+        <strong>Humidity:</strong> {{ weather?.main?.humidity }}%
+      </li>
+      <li class="list-group-item">
+        <strong>Wind Speed:</strong> {{ weather?.wind?.speed }} m/s
+      </li>
+    </ul>
+  </div>
+</div>
