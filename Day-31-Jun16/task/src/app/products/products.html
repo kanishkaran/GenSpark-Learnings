@@ -1,0 +1,28 @@
+<div class="container">
+    <label> Search:
+        <input type="text" [(ngModel)]="searchTerm" (input)="handleSearch()">
+    </label>
+</div>
+
+
+@if(!loading || searchTerm == ""){
+<div class="fade-in">
+
+    @for (item of products; track $index) {
+    <app-product [product]="item"></app-product>
+    }
+</div>
+}
+@else {
+<div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+    </div>
+</div>
+}
+
+@if (showBackToTop) {
+<button (click)="backToTop()"
+    class="btn btn-primary">
+    ↑ Back to Top
+</button>
+}

@@ -1,0 +1,23 @@
+.fade-in{
+    opacity: 0;
+    animation: fadeIn 01s ease-in forwards;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 20px;
+    gap: 10px;
+}
+
+.btn{
+    position: fixed; 
+    bottom: 40px; 
+    right: 40px; 
+    z-index: 1000;
+}
+
+@keyframes fadeIn{
+    to{
+        opacity: 1;
+    }
+}
