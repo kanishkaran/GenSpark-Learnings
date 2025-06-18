@@ -1,0 +1,39 @@
+<div class="container mt-4">
+  <h4 class="mb-3">User Filters</h4>
+  <div class="row mb-4">
+    <div class="col-md-4 mb-2">
+      <input type="text" class="form-control" placeholder="Gender" [(ngModel)]="gender" (input)="handleFilters()" />
+    </div>
+    <div class="col-md-4 mb-2">
+      <input type="text" class="form-control" placeholder="Role" [(ngModel)]="role" (input)="handleFilters()" />
+    </div>
+    <div class="col-md-4 mb-2">
+      <input type="text" class="form-control" placeholder="State" [(ngModel)]="state" (input)="handleFilters()" />
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>Role</th>
+          <th>State</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (users) {
+        @for (user of filteredUsers; track $index) {
+        <tr>
+            <td>{{user?.firstName}} {{user?.lastName}}</td>
+            <td>{{user?.gender}}</td>
+            <td>{{user?.role}}</td>
+            <td>{{user.address?.state}}</td>
+        </tr>
+        }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

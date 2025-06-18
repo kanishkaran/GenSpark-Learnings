@@ -1,0 +1,50 @@
+<div class="container py-4">
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <div class="card shadow-sm p-3">
+        <h5 class="card-title text-center">Gender Distribution</h5>
+        <google-chart 
+          [type]="pieType" 
+          [data]="genderChartData" 
+          [columns]="columns"
+          [width]="400" 
+          [height]="300">
+        </google-chart>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card shadow-sm p-3">
+        <h5 class="card-title text-center">User Role Distribution</h5>
+        <google-chart 
+          [type]="barType" 
+          [data]="roleChartData" 
+          [columns]="['Role', 'Count']" 
+          [width]="500" 
+          [height]="300">
+        </google-chart>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card shadow-sm p-3">
+        <h5 class="card-title text-center">Users by State (Geo Map)</h5>
+        <google-chart 
+          [type]="geoType" 
+          [data]="stateGeoChartData" 
+          [columns]="geoColumns" 
+          [options]="{
+            region: 'US',
+            displayMode: 'regions',
+            resolution: 'provinces',
+            colorAxis: { colors: ['#aec7e8', '#1f77b4'] }
+          }"
+          [width]="800"
+          [height]="500">
+        </google-chart>
+      </div>
+    </div>
+  </div>
+</div>

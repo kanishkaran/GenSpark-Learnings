@@ -1,0 +1,50 @@
+<div class="container py-4">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label for="firstName" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="John" #fname="ngModel" required
+                [(ngModel)]="user.firstName">
+            @if (fname.control.errors && fname.control.touched) {
+            <span class="text-danger small d-block mt-1">Firstname cannot be empty</span>
+            }
+        </div>
+
+        <div class="col-md-6">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName" placeholder="Doe" [(ngModel)]="user.lastName" required #lname="ngModel">
+            @if (lname.control.errors && lname.control.touched) {
+            <span class="text-danger small d-block mt-1">LastName cannot be empty</span>
+            }
+        </div>
+
+        <div class="col-md-6">
+            <label for="gender" class="form-label">Gender</label>
+            <select class="form-select" id="gender" name="gender"  [(ngModel)]="user.gender">
+                <option value="">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label for="role" class="form-label">Role</label>
+            <input type="text" class="form-control" id="role" placeholder="..." [(ngModel)]="user.role" #role="ngModel" required>
+            @if (role.control.errors && role.control.touched) {
+                <span class="text-danger small d-block mt-1">Role cannot be empty</span>
+            }
+        </div>
+
+        <div class="col-md-6">
+            <label for="state" class="form-label">State</label>
+            <input type="text" class="form-control" id="state" placeholder="Mississippi"
+                [(ngModel)]="user.address.state" #state="ngModel" required>
+                @if (state.control.errors && state.control.touched) {
+                    <span class="text-danger small d-block mt-1">State cannot be empty</span>
+                }
+        </div>
+
+        <div class="col-12">
+            <button class="btn btn-primary mt-3" (click)="addUser()" >Add User</button>
+        </div>
+    </div>
+</div>
