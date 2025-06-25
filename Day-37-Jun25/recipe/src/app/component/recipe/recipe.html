@@ -1,0 +1,20 @@
+<div class="recipe-card">
+    <img [src]="recipe?.image" alt="" class="recipe-img">
+    <div class="recipe-content">
+        <h2 class="recipe-title">{{recipe?.name}}</h2>
+            <p class="cuisine"><strong>Cuisine:</strong>{{recipe?.cuisine}} </p>
+            <p><strong>Prep Time: </strong>{{recipe?.prepTimeMinutes}}</p>
+            <p><strong>Cook Time: </strong>{{recipe?.cookTimeMinutes}}</p>
+            <p><strong>Ingredients: </strong>{{recipe?.ingredients?.join(',')}}</p>
+            
+            <div class="instructions">
+                <p><strong>Instructions: </strong></p>
+                <ol>
+                    @for (item of recipe?.instructions; track $index) {
+                        <li>{{item}}</li>
+                    }
+                </ol>
+            </div>
+    </div>
+    <div class="number">{{recipe?.id}}</div>
+</div>

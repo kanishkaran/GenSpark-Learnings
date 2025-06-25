@@ -1,0 +1,15 @@
+<h1>Recipes</h1>
+
+<label for="">Search:</label>
+<input type="text" class="form-control" [(ngModel)]="searchTerm" (input)="handleSearch()">
+<div class="recipes">
+    @if(recipes){
+
+    @for (recipe of recipes; track $index) {
+    <app-recipe [recipe]="recipe"></app-recipe>
+    }
+    }
+    @else {
+    <p>No recipes Found</p>
+    }
+</div>
