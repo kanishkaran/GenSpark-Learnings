@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:17
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: '[]kanish'
+      POSTGRES_DB: HealthCareDB
+    ports:
+      - "5434:5434"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dotnet_app
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=HealthCareDB;Username=postgres;Password=[]kanish"
+volumes:
+  pgdata:
+    
+
+
+# "User ID=postgres;Password=[]kanish;Host=localhost;Port=5432;Database=HealthCareDB;
