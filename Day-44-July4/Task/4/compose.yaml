@@ -1,0 +1,25 @@
+
+
+services:
+  api:
+    image: task-4-api:latest
+    networks:
+      - task-4-net
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+
+  web:
+    image: task-4-fe:latest
+    ports:
+      - "3000:80"
+    networks:
+      - task-4-net
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+
+networks:
+  task-4-net:
