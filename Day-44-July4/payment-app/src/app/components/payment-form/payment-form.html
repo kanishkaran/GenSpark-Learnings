@@ -1,0 +1,39 @@
+
+<h1>Payment</h1>
+<form [formGroup]="paymentForm" class="container mt-4 p-4 border rounded shadow-sm bg-light" novalidate
+    (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+        <label class="form-label">Amount</label>
+        <input type="text" formControlName="amount" class="form-control" placeholder="Enter amount" />
+        @if (amount?.touched && amount?.errors) {
+        <div class="text-danger">Amount is required.</div>
+        }
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Name</label>
+        <input type="text" formControlName="name" class="form-control" placeholder="Enter your name" />
+        @if (name?.touched && name?.errors) {
+        <div class="text-danger">Name is required. Min Length 3</div>
+        }
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" formControlName="email" class="form-control" placeholder="Enter your email" />
+        @if (email?.touched && email?.errors) {
+        <div class="text-danger">Enter a valid email.</div>
+        }
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Contact</label>
+        <input type="text" formControlName="contact" class="form-control" placeholder="Enter contact number" />
+        @if (contact?.touched && contact?.errors) {
+        <div class="text-danger">Provide Valid Contact Number</div>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100" [disabled]="paymentForm.invalid">Pay</button>
+
+</form>
