@@ -6,7 +6,7 @@ services:
     networks:
       - task-4-net
     deploy:
-      replicas: 2
+      replicas: 1
       restart_policy:
         condition: on-failure
 
@@ -17,7 +17,7 @@ services:
     networks:
       - task-4-net
     deploy:
-      replicas: 2
+      replicas: 1
       restart_policy:
         condition: on-failure
 

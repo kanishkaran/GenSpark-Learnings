@@ -1,0 +1,31 @@
+
+
+services:
+  nodejs_app:
+    image: node_api
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    networks:
+      - mongo-task-net
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/testDb
+  
+  frontend: 
+    image: react-app
+    ports:
+      - "3000:80"
+    depends_on:
+      - nodejs_app
+    networks:
+      - mongo-task-net
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - mongo-task-net
+
+networks:
+  mongo-task-net:
