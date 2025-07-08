@@ -1,0 +1,6 @@
+@AzureVmConnection_HostAddress = http://localhost:5103
+
+GET {{AzureVmConnection_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
