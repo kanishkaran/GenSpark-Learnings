@@ -14,7 +14,7 @@ export class Product {
 @Input() product: ProductModel = new ProductModel();
 router = inject(ActivatedRoute)
 productService = inject(productService)
-route = inject(Router)
+
 id : number = 0;
 
   ngOnInit(){

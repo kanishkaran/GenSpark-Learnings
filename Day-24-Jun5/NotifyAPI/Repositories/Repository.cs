@@ -26,6 +26,14 @@ namespace NotifyAPI.Repositories
             return item;
         }
 
+        public async Task<T> Update(K id, T item)
+        {
+            var old_item = await GetById(id) ?? throw new KeyNotFoundException("Item not found");
+            _context.Entry(old_item).CurrentValues.SetValues(item);
+            await _context.SaveChangesAsync();
+            return item;
+        }
+
         public async Task<K> Delete(K id)
         {
             var item = await GetById(id);
@@ -37,14 +45,6 @@ namespace NotifyAPI.Repositories
             _context.Remove(item);
             await _context.SaveChangesAsync();
             return id;
-        }
-
-        public async Task<T> Update(K id, T item)
-        {
-            var old_item = await GetById(id) ?? throw new KeyNotFoundException("Item not found");
-            _context.Entry(old_item).CurrentValues.SetValues(item);
-            await _context.SaveChangesAsync();
-            return item;
         }
 
     }

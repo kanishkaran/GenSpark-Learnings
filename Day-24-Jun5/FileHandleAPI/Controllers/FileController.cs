@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BCrypt.Net;
 using FileHandleAPI.Interfaces;
 using FileHandleAPI.Models;
 using FileHandleAPI.Models.Dtos;
@@ -23,26 +24,16 @@ namespace FileHandleAPI.Controllers
         [HttpPost("upload")]
         public async Task<ActionResult<string>> UploadDocument([FromForm] FileUploadDto file)
         {
-            try
-            {
-                var result = await _fileHandleService.PostFile(file.FileDetails, file.FileType);
-                return result;
-            }
-            catch (Exception e)
-            {
-
-                return BadRequest(e.Message);
-            }
+            return file.FileDetails.ContentType + " "+ Path.GetExtension(file.FileDetails.FileName);
         }
 
 
         [HttpGet("GetFile")]
-        public async Task<ActionResult<FileGetDto>> GetFile(int id)
+        public async Task<ActionResult<string>> GetFile(int id)
         {
             try
             {
-                var result = await _fileHandleService.DownloadFileById(id);
-                return result;
+                return BCrypt.Net.BCrypt.HashPassword("admin123");
             }
             catch (Exception e)
             {

@@ -22,7 +22,7 @@ namespace NotifyAPI.Services
 
             
         }
-        public async Task<string> GenerateToken(User user)
+        public string GenerateToken(User user)
         {
             List<Claim> claims = new List<Claim>
             {

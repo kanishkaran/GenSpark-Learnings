@@ -27,3 +27,9 @@ Thumbs.db
 # NuGet packages
 *.nupkg
 packages/
+
+migrations/
+Logs/
+Uploads/
+
+node_modules

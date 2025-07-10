@@ -8,6 +8,6 @@ namespace NotifyAPI.Interfaces
 {
     public interface ITokenService
     {
-        Task<string> GenerateToken(User user);
+        string GenerateToken(User user);
     }
 }

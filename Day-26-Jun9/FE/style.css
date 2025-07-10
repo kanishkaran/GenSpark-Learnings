@@ -1,13 +1,10 @@
-
-
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: 'Inter', sans-serif;
     background: #f5f5f5;
     color: #333;
@@ -23,69 +20,96 @@ body{
 
 
 /* Header */
-.header{
+.header {
     background: #fff;
     padding: 24px 0;
     border-bottom: 1px;
 }
 
-.header-inner{
+.header-inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.logo{
+.logo {
     font-size: 20px;
     font-weight: 600;
 }
 
-.nav a{
+.nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.nav a {
     margin-right: 16px;
     color: #333;
     text-decoration: none;
     font-size: 16px;
 }
 
-.nav .btn{
+.nav .btn {
     margin-left: 8px;
 }
 
+.menu-icon {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+}
 
-.btn{
+
+.btn {
     padding: 12px 24px;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
 }
 
-.btn.primary{
+.btn.primary {
     background: rgb(93, 160, 223);
     border-radius: 8px;
     border: none;
     color: white;
 }
 
-.btn.outline{
-    background: transparent;
+.btn.outline {
+    background-color: white;
     border: 1px solid #666;
     color: #666;
 }
 
+.btn.primary:hover {
+    background-color: rgb(143, 184, 198);
+    color: #666;
+}
+
+.btn.outline:hover{
+    background-color: rgb(93, 160, 223);
+    color: white;
+}
+
+.nav a:hover{
+    color: rgb(93, 160, 223);
+}
+
+
 /* Hero */
 
-.hero{
+.hero {
     background: rgb(186, 228, 243);
 }
 
-.hero-content{
+.hero-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 40px;
 }
 
-.hero-text h1{
+.hero-text h1 {
     font-size: 32px;
     font-weight: 600;
     margin-bottom: 16px;
@@ -97,7 +121,7 @@ body{
     color: #333;
 }
 
-.hero .book{
+.hero .book {
     background: rgb(93, 160, 223);
     color: #fff;
     padding: 12px 20px;
@@ -106,17 +130,22 @@ body{
     border-radius: 8px;
 }
 
+.book:hover {
+    background-color: rgb(143, 184, 198);
+    color: #666;
+}
+
 .hero-image img {
     width: 320px;
 }
 
 /* Services */
 
-.services{
+.services {
     padding: 60px 0;
 }
 
-.services h2{
+.services h2 {
     text-align: center;
     font-size: 24px;
     font-weight: 600;
@@ -125,12 +154,12 @@ body{
 
 .card-container {
     display: flex;
-    gap:24px;
+    gap: 24px;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.card{
+.card {
     background: #fff;
     box-shadow: 0 2px 8px rgb(215, 215, 215);
     padding: 24px;
@@ -140,52 +169,57 @@ body{
     min-width: 240px;
 }
 
-.card h3{
+.card:hover {
+    transform: scale(1.10);
+    transition: 0.3s ease;
+}
+
+.card h3 {
     font-size: 18px;
     margin: 12px 0 8px;
 
 }
 
-.card p{
+.card p {
     font-size: 16px;
     color: #666;
 }
 
-.card img{
+.card img {
     height: 40px;
 }
 
 /* Testimonials */
 
 
-.testimonials{
+.testimonials {
     background: rgb(208, 235, 245);
     padding: 60px 0;
     text-align: center;
 }
 
-.testimonials h2{
-    font-size:24px;
+.testimonials h2 {
+    font-size: 24px;
     font-weight: 600;
     margin-bottom: 32px;
 }
 
-.testimonial-box{
+.testimonial-box {
     background-color: #fff;
     padding: 24px;
     max-width: 600px;
     margin: auto;
-    border-radius:8px;
+    border-radius: 8px;
     font-size: 16px;
 }
 
-.content{
+.content {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.quote-icon{
+.quote-icon {
     font-size: 40px;
     color: rgb(82, 196, 238);
     margin-top: 4px;
@@ -193,12 +227,12 @@ body{
 
 /* Clinic Hours */
 
-.clinic-hours{
+.clinic-hours {
     background: #fff;
     padding: 40px 0;
 }
 
-.hours{
+.hours {
     display: flex;
     justify-content: space-between;
     gap: 40px;
@@ -209,7 +243,7 @@ body{
     margin-bottom: 12px;
 }
 
-.clinic-hours p{
+.clinic-hours p {
     font-size: 14px;
     color: #333;
 }
@@ -223,12 +257,7 @@ body{
     }
 
     .hero-image img {
-        width: 240px;
-    }
-
-    .card-container {
-        flex-wrap: wrap;
-        justify-content: center;
+        display: block;
     }
 
     .card {
@@ -243,38 +272,58 @@ body{
     }
 }
 
-@media (max-width: 700px){
+@media (max-width: 700px) {
 
-    .header{
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 16px;
+    .header {
+        flex-wrap: wrap;
     }
 
-    .logo{
+    .header-inner {
+        position: relative;
+    }
+
+    .logo {
         margin-bottom: 12px;
     }
-    .nav {
-        flex-wrap: wrap;
-        width: 100%;
-        gap: 12px;
-        justify-content: space-between;
+
+    .menu-icon {
+        display: block;
     }
 
-    .nav a{
-        font-size: 14px;
-        padding: 8px 12px;
+    .nav {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background: #fff;
+        flex-direction: column;
+        gap: 0;
+        padding: 10px 20px;
+        display: none;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 100;
     }
+
+
+    .nav a,
+    .nav button {
+        margin: 10px 0;
+    }
+
+    #menu-toggle:checked~.nav {
+        display: flex;
+    }
+
 
     .hero-text h1 {
         font-size: 28px;
     }
 
-    .hero-text p{
+    .hero-text p {
         font-size: 14px;
     }
 
-    .btn{
+    .btn {
         width: 100%;
         text-align: center;
         margin: 10px;
@@ -285,19 +334,23 @@ body{
         font-size: 14px;
     }
 
-    .card h3{
+    .card-container {
+        justify-content: center;
+    }
+
+    .card h3 {
         font-size: 16px;
     }
 
-    .card p{
+    .card p {
         font-size: 13px;
     }
 
-    .clinic-hours h3{ 
+    .clinic-hours h3 {
         font-size: 18px;
     }
 
-    .clinic-hours p{
+    .clinic-hours p {
         font-size: 13px;
     }
 }

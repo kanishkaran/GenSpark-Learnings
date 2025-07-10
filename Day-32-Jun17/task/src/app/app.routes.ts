@@ -6,7 +6,7 @@ import { Login } from './login/login';
 import { Detail } from './detail/detail';
 
 export const routes: Routes = [
-    {'path': 'products', canActivate: [AuthGuard]
+    {'path': 'products', canActivate: []
         , children: [
         {'path': '', component: Products},
         {'path': ':id', component: Product, canActivate:[AuthGuard]}
