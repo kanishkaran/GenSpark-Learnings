@@ -1,0 +1,53 @@
+<div class="container">
+    <h1>Video Library</h1>
+
+    @if (selectedVideo) {
+        <div class="video-player-section">
+          <div class="player-header">
+            <h2>{{ selectedVideo.title }}</h2>
+            <button class="close-btn" (click)="closeVideo()">×</button>
+          </div>
+          <div class="video-player">
+            <video controls width="100%" height="400" autoplay>
+              <source [src]="selectedVideo.blobUrl" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <div class="video-details">
+            <p class="description">{{ selectedVideo.description }}</p>
+            <p class="date">Uploaded: {{ selectedVideo.uploadDate | date }}</p>
+          </div>
+        </div>
+      }
+
+
+    @if (isLoading) {
+        <div class="loading">Loading Videos...</div>
+    }
+
+    @else if (videos.length == 0) {
+        <div class="no-videos">No Videos Found</div>
+    }
+    @else {
+        <div class="video-list">
+
+            <div class="videos-grid">
+                @for (video of videos; track video.id) {
+                    <div class="video-card" (click)="selectVideo(video)">
+                        <div class="video-thumbnail">
+                            <div class="play-overlay">
+                                <div class="play-button">Play</div>
+                            </div>
+                        </div>
+
+                        <div class="video-info">
+                            <h3>{{ video.title }}</h3>
+                            <p class="description"> {{ video.description }}</p>
+                            <p class="date"> {{ video.uploadDate | date:"medium" }}</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>

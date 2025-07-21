@@ -1,0 +1,72 @@
+<div class="upload-container">
+    <div class="upload-card">
+        <h2>Upload New Video</h2>
+
+        <form (ngSubmit)="onSubmit()" #uploadForm="ngForm">
+            <div class="form-group">
+                <label for="title">Title *</label>
+                <input type="text" id="title" name="title" [(ngModel)]="uploadData.title" required #titleInput="ngModel"
+                    class="form-control" placeholder="Enter video title" />
+                @if (titleInput.invalid && titleInput.touched) {
+                <div class="error-message">Title is required</div>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description *</label>
+                <textarea id="description" name="description" [(ngModel)]="uploadData.description" required
+                    #descriptionInput="ngModel" class="form-control" rows="4"
+                    placeholder="Enter video description"></textarea>
+                @if (descriptionInput.invalid && descriptionInput.touched) {
+                <div class="error-message">Description is required</div>
+                }
+            </div>
+
+            <div class="form-group">
+                <label for="file">Video File *</label>
+                <div class="file-input-wrapper">
+                    <input type="file" id="file" name="file" (change)="onFileSelected($event)" accept="video/*" required
+                        class="file-input" />
+                    <div class="file-input-display">
+                        @if (selectedFile) {
+                        <span class="file-name">{{ selectedFile.name }}</span>
+                        <span class="file-size">({{ selectedFile.size }})</span>
+                        } @else {
+                        <span class="file-placeholder">Choose video file...</span>
+                        }
+                    </div>
+                </div>
+                @if (!selectedFile && uploadForm.submitted) {
+                <div class="error-message">Video file is required</div>
+                }
+            </div>
+
+            @if (errorMessage) {
+            <div class="alert alert-error">
+                {{ errorMessage }}
+            </div>
+            }
+
+            @if (successMessage) {
+            <div class="alert alert-success">
+                {{ successMessage }}
+            </div>
+            }
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" [disabled]="isUploading || uploadForm.invalid">
+                    @if (isUploading) {
+                    Uploading...
+                    } @else {
+                    Upload Video
+                    }
+                </button>
+
+                <button type="button" class="btn btn-secondary" (click)="resetForm(uploadForm)"
+                    [disabled]="isUploading">
+                    Reset
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
