@@ -1,0 +1,70 @@
+
+
+Controllers
+
+- CategoryController
+| HTTP Method | Endpoint               | Parameters            | Description                       | DTO / Body    |
+| ----------- | ---------------------- | --------------------- | --------------------------------- | ------------- |
+| `GET`       | `/api/categories`      | `page` (optional int) | Get paginated list of categories  | –             |
+| `GET`       | `/api/categories/all`  | None                  | Get all categories (for partials) | –             |
+| `GET`       | `/api/categories/{id}` | `id` (int)            | Get category by ID                | –             |
+| `POST`      | `/api/categories`      | –                     | Create a new category             | `CategoryDTO` |
+| `PUT`       | `/api/categories/{id}` | `id` (int)            | Update an existing category       | `CategoryDTO` |
+| `DELETE`    | `/api/categories/{id}` | `id` (int)            | Delete a category by ID           | –             |
+
+
+- ColorsController
+| HTTP Method | Endpoint           | Parameters | Description                 | DTO / Body |
+| ----------- | ------------------ | ---------- | --------------------------- | ---------- |
+| `GET`       | `/api/colors`      | None       | Get all colors              | –          |
+| `GET`       | `/api/colors/{id}` | `id` (int) | Get color by ID             | –          |
+| `POST`      | `/api/colors`      | –          | Create new color            | `ColorDTO` |
+| `PUT`       | `/api/colors/{id}` | `id` (int) | Update existing color by ID | `ColorDTO` |
+| `DELETE`    | `/api/colors/{id}` | `id` (int) | Delete color by ID          | –          |
+
+- ContactUsController
+| HTTP Method | Endpoint            | Parameters | Description                            | DTO / Body     |
+| ----------- | ------------------- | ---------- | -------------------------------------- | -------------- |
+| `POST`      | `/api/contact`      | —          | Submit a contact request with CAPTCHA  | `ContactUsDTO` |
+| `GET`       | `/api/contact/{id}` | `id` (int) | Get a contact entry by ID (admin view) | —              |
+| `GET`       | `/api/contact`      | —          | Get all contact entries (admin view)   | —              |
+| `DELETE`    | `/api/contact/{id}` | `id` (int) | Delete a contact entry                 | —              |
+
+- NewsController
+
+- NewsManagementController
+| HTTP Method | Endpoint                 | Description                        | Request Body       | Response                   |
+| ----------- | ------------------------ | ---------------------------------- | ------------------ | -------------------------- |
+| GET         | `/api/news`              | Get all news items                 | None               | JSON list of all news      |
+| GET         | `/api/news/{id}`         | Get news by ID                     | None               | JSON news item or 404      |
+| POST        | `/api/news`              | Create a new news item             | News object (JSON) | Created news object + 201  |
+| PUT         | `/api/news/{id}`         | Update existing news item          | News object (JSON) | Updated news object or 404 |
+| DELETE      | `/api/news/{id}`         | Delete a news item by ID           | None               | 204 No Content or 404      |
+| GET         | `/api/news/export/csv`   | Export all news data as CSV file   | None               | CSV file download          |
+| GET         | `/api/news/export/excel` | Export all news data as Excel file | None               | Excel file download        |
+
+- OrderController
+| HTTP Method | Endpoint             | Parameters    | Description                                | Response                |
+| ----------- | -------------------- | ------------- | ------------------------------------------ | ----------------------- |
+| `GET`       | `/api/orders`        | `page` (int?) | Get paginated list of orders               | `PagedResult<OrderDTO>` |
+| `GET`       | `/api/orders/{id}`   | `id` (int)    | Get order details by ID                    | `OrderDTO`              |
+| `POST`      | `/api/orders`        | —             | Create a new order                         | `OrderDTO`              |
+| `PUT`       | `/api/orders/{id}`   | `id` (int)    | Update an existing order                   | `OrderDTO`              |
+| `DELETE`    | `/api/orders/{id}`   | `id` (int)    | Delete an order by ID                      | —                       |
+| `GET`       | `/api/orders/export` | —             | Export order list as a PDF (admin feature) | Returns PDF             |
+
+- ProductController
+| HTTP Method | Endpoint             | Parameters                       | Description                                                | Response Type             |
+| ----------- | -------------------- | -------------------------------- | ---------------------------------------------------------- | ------------------------- |
+| `GET`       | `/api/products`      | `page` (int?), `category` (int?) | Get paginated product list (with optional category filter) | `PagedResult<ProductDTO>` |
+| `GET`       | `/api/products/{id}` | `id` (int)                       | Get product details by ID                                  | `ProductDTO`              |
+
+- ShoppingCartController
+| HTTP Method | Endpoint                        | Parameters / Query       | Description                                    | Request Body / DTO                 | Response                       |
+| ----------- | ------------------------------- | ------------------------ | ---------------------------------------------- | ---------------------------------- | ------------------------------ |
+| GET         | `/api/shoppingcart`             | —                        | Get current shopping cart items (from session) | —                                  | List<CartItemDTO>              |
+| POST        | `/api/shoppingcart/order-now`   | Query: `productId` (int) | Add a product (with quantity=1) to cart        | —                                  | Updated List<CartItemDTO>      |
+| DELETE      | `/api/shoppingcart/{productId}` | Path: `productId` (int)  | Remove a product from cart                     | —                                  | Updated List<CartItemDTO>      |
+| PUT         | `/api/shoppingcart`             | —                        | Update cart quantities                         | List<CartItemUpdateDTO>            | Updated List<CartItemDTO>      |
+| POST        | `/api/shoppingcart/checkout`    | —                        | Create order from cart and clear session       | CheckoutDTO                        | OrderConfirmationDTO           |
+| POST        | `/api/shoppingcart/paypal`      | —                        | Start PayPal payment process                   | PayPalPaymentRequestDTO (optional) | Redirect URL or payment result |

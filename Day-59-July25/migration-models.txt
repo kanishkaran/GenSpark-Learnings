@@ -1,0 +1,69 @@
+Migrations Project
+
+
+Models
+
+    - Category 
+        - CategoryId : int
+        - Name : string
+
+    - Colors
+        - Id : int
+        - Color : string
+
+    - Model
+        - Id : int
+        - Model : string 50
+
+    - News
+        - Id : int
+        - userId  [FK]
+        - Title: string 250
+        - ShortDescription: string 500
+        - Image : (string?)
+        - Content: string
+        - createdDate: datetime
+        - Status: int
+
+    - Orders
+        - Order id : int
+        - orderName : string
+        - Orderdate : DateOnly
+        - PaymentType : string
+        - Status : string
+        - Customer name : string
+        - Customer phone : string
+        - Customer email : string
+        - Customer address  : string
+
+    - OrderDetails
+        - Order id  [FK]
+        - Product id    [FK]
+        - Price : float 
+        - Quantity  : int
+
+    - Products
+        - productId : int
+        - ProductName: string
+        - Image: string
+        - Price: float
+        - userId  [FK]
+        - CategoryId  [FK]
+        - ColorId  [FK]
+        - ModelId  [FK]
+        - StorageId: int
+        - SellStartDate: datetime
+        - SellEndDate: datetime
+        - IsNew: int
+
+    - Users
+        - userId: int
+        - username: string
+        - password: string
+
+    - ContactUs
+        - Id : int
+        - Name : string maxL - 50
+        - Email : string maxL - 150
+        - Phone : string maxL-20
+        - Content: string maxL - 2000
